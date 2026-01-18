@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f1e">
+    <meta name="description" content="Descubre tu próxima aventura culinaria en Madrid, Barcelona y más ciudades de España">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Ruleta Gastronómica">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <title>🎰 Ruleta Gastronómica</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Sistema de Diseño - Todo Inline -->
+    <style>
+/* ===================================================================
+   RULETA GASTRONÓMICA - SISTEMA DE DISEÑO
+   Concepto: "Noche de Aventura"
+   Versión: 2.0
+   Mobile-First + Capacitor Ready
+   =================================================================== */
+
+/* ===================================================================
+   1. VARIABLES CSS (Design Tokens)
+   =================================================================== */
+
+:root {
+  /* Colores Primarios */
+  --color-bg-primary: #0f0f1e;
+  --color-bg-secondary: #1a1a2e;
+  --color-bg-tertiary: #2d3561;
+  
+  /* Colores de Acento */
+  --color-accent-primary: #ff5252;
+  --color-accent-secondary: #ffd700;
+  --color-accent-success: #00d4aa;
+  --color-accent-info: #48dbfb;
+  --color-accent-warning: #feca57;
+  --color-accent-danger: #ff6348;
+  
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #ff5252 0%, #ee5a6f 100%);
+  --gradient-secondary: linear-gradient(135deg, #ffd700 0%, #ff9f43 100%);
+  --gradient-success: linear-gradient(135deg, #00d4aa 0%, #10ac84 100%);
+  --gradient-bg: linear-gradient(135deg, #0f0f1e 0%, #16213e 100%);
+  --gradient-card: linear-gradient(135deg, #2d3561 0%, #1f2647 100%);
+  
+  /* Texto */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a8b2d1;
+  --color-text-tertiary: #7a8599;
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.6);
+  
+  /* Sombras de Color */
+  --shadow-accent: 0 10px 30px rgba(255, 82, 82, 0.4);
+  --shadow-success: 0 5px 15px rgba(0, 212, 170, 0.4);
+  --shadow-gold: 0 0 20px rgba(255, 215, 0, 0.5);
+  
+  /* Espaciado (Sistema 8pt) */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Tamaños Táctiles (Mobile App Guidelines) */
+  --touch-min: 48px;
+  --touch-comfortable: 56px;
+  --touch-large: 64px;
+  
+  /* Tamaños Táctiles (Mobile App Guidelines) */
+  --touch-min: 48px;
+  --touch-comfortable: 56px;
+  --touch-large: 64px;
+  
+  /* Bordes */
+  --radius-sm: 10px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --radius-xl: 25px;
+  --radius-full: 50px;
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Tipografía */
+  --font-primary: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-secondary: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  
+  /* Z-Index */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-overlay: 2000;
+  --z-drawer: 2001;
+  --z-modal: 3000;
+  --z-toast: 10000;
+}
+
+/* ===================================================================
+   2. RESET Y BASE
+   =================================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background: var(--gradient-bg);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  
+  /* Mejoras de rendimiento */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Prevenir zoom accidental en iOS */
+  touch-action: manipulation;
+
+  /* Safe areas para notch y barra de navegación */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ===================================================================
+   3. TIPOGRAFÍA
+   =================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  background: var(--gradient-secondary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glow 2s ease-in-out infinite;
+}
+
+h2 {
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--color-accent-secondary);
+}
+
+h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: var(--color-accent-secondary);
+}
+
+p {
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* ===================================================================
+   4. LAYOUT PRINCIPAL
+   =================================================================== */
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  padding-top: max(var(--space-lg), env(safe-area-inset-top));
+  padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===================================================================
+   5. HEADER
+   =================================================================== */
+
+.header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md); /* Aumentado de sm a md para táctil */
+  margin-bottom: var(--space-sm);
+  
+  /* Safe area para notch */
+  padding-top: env(safe-area-inset-top);
+  padding-left: max(var(--space-sm), env(safe-area-inset-left));
+  padding-right: max(var(--space-sm), env(safe-area-inset-right));
+}
+
+.header > :first-child {
+  justify-self: start;
+}
+
+.header > :nth-child(2) {
+  justify-self: center;
+}
+
+.header > :last-child {
+  justify-self: end;
+}
+
+/* Logo animado */
+.logo-icon {
+  animation: spinLogo 3s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 82, 82, 0.5));
+}
+
+@keyframes spinLogo {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+/* ===================================================================
+   6. BOTONES BASE
+   =================================================================== */
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-base);
+  
+  /* Táctil */
+  min-height: var(--touch-min);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Botón de Ajustes */
+.settings-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent-secondary);
+  font-size: 1.5rem;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  min-width: var(--touch-min);  /* NUEVA LÍNEA */
+  min-height: var(--touch-min); /* NUEVA LÍNEA */
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.settings-btn:hover,
+.settings-btn:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+/* Botón de Pasaporte */
+.passport-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-accent-secondary);
+  font-size: 0.9rem;
+  height: var(--touch-min);
+  border-radius: var(--radius-xl);
+  font-weight: bold;
+  width: var(--touch-min);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+}
+
+.passport-icon {
+  font-size: 1.3rem;
+  animation: trophyGlow 2s ease-in-out infinite;
+}
+
+@keyframes trophyGlow {
+  0%, 100% { 
+    transform: scale(1); 
+    filter: brightness(1); 
+  }
+  50% { 
+    transform: scale(1.1); 
+    filter: brightness(1.3) drop-shadow(0 0 8px var(--color-accent-secondary));
+  }
+}
+
+.passport-btn:hover,
+.passport-btn:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+/* ===================================================================
+   7. SELECTOR DE CIUDAD
+   =================================================================== */
+
+.subtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+}
+
+.city-selector-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: var(--space-xl);
+}
+
+.city-selector {
+  width: 100%;
+  padding: 15px 20px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  background: var(--gradient-card);
+  color: var(--color-text-primary);
+  border: 2px solid rgba(255, 82, 82, 0.3);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  appearance: none;
+  
+  /* Flecha personalizada */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23ffd700' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 45px;
+  
+  /* Táctil */
+  min-height: var(--touch-comfortable);
+  touch-action: manipulation;
+}
+
+.city-selector:hover,
+.city-selector:focus {
+  border-color: var(--color-accent-secondary);
+  box-shadow: var(--shadow-lg), 0 0 0 3px rgba(255, 215, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ===================================================================
+   8. RULETA
+   =================================================================== */
+
+.wheel-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin: var(--space-lg) auto;
+}
+
+#wheelCanvas {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.6));
+  transition: transform 5s cubic-bezier(0.1, 0, 0.1, 1);
+}
+
+.pointer {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid var(--color-accent-secondary);
+  filter: drop-shadow(0 3px 8px rgba(255, 215, 0, 0.6));
+  z-index: var(--z-base);
+  animation: pointerPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pointerPulse {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ===================================================================
+   9. BOTÓN DE GIRAR
+   =================================================================== */
+
+.spin-button {
+  background: var(--gradient-primary);
+  color: white;
+  padding: 18px 50px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: var(--space-xl);
+  animation: pulse 2s ease-in-out infinite;
+  
+  /* Táctil */
+  min-height: var(--touch-comfortable);
+  min-width: 200px;
+}
+
+.spin-button:hover,
+.spin-button:active {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 82, 82, 0.5);
+}
+
+.spin-button:disabled {
+  animation: none;
+  transform: none;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* ===================================================================
+   10. DRAWERS (Sistema Dual)
+   =================================================================== */
+
+/* Overlay compartido */
+.drawer-overlay,
+.drawer-overlay-passport {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: var(--z-overlay);
+  animation: fadeIn var(--transition-base);
+  backdrop-filter: blur(2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Drawer base */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 90%;
+  max-width: 400px;
+  height: 100%;
+  height: -webkit-fill-available; /* Safari iOS */
+  background: var(--gradient-card);
+  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.6);
+  transition: right var(--transition-base);
+  z-index: var(--z-drawer);
+  display: flex;
+  flex-direction: column;
+  
+  /* Safe areas */
+  padding-top: env(safe-area-inset-top);
+}
+
+.drawer.active {
+  right: 0;
+}
+
+/* Header del drawer con handle */
+.drawer-header,
+.passport-header {
+  padding: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  position: relative;
+}
+
+/* Handle visual para arrastrar */
+.drawer-header::before,
+.passport-header::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.drawer-title {
+  font-size: 1.3rem;
+  color: var(--color-accent-secondary);
+  font-family: var(--font-primary);
+}
+
+/* Botón de cerrar drawer */
+.close-drawer {
+  background: none;
+  color: var(--color-text-primary);
+  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: background var(--transition-base);
+}
+
+.close-drawer:hover,
+.close-drawer:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Botón de instalación PWA */
+.install-btn {
+  background: var(--gradient-success);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 0.9rem;
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  box-shadow: var(--shadow-success);
+}
+
+.install-btn:hover,
+.install-btn:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 212, 170, 0.5);
+}
+
+.install-btn.show {
+  display: inline-flex;
+}
+
+/* ===================================================================
+   11. LISTA DE PAÍSES (Ajustes)
+   =================================================================== */
+
+.search-box {
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  font-size: 1rem;
+  font-family: var(--font-secondary);
+  transition: all var(--transition-base);
+  
+  /* Táctil */
+  min-height: var(--touch-min);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-accent-secondary);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.countries-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-sm) 0;
+  
+  /* Scroll nativo iOS */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  /* Safe area inferior */
+  padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background var(--transition-fast);
+  
+  /* Táctil */
+  min-height: var(--touch-comfortable);
+}
+
+.country-item:hover,
+.country-item:active {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.country-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+}
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  width: 50px;
+  height: 26px;
+  background: var(--color-accent-primary);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background var(--transition-base);
+  flex-shrink: 0;
+  
+  /* Táctil - área expandida */
+  padding: 10px;
+  margin: -10px;
+}
+
+.toggle.active {
+  background: var(--color-accent-success);
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: left var(--transition-base);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.toggle.active .toggle-thumb {
+  left: 27px;
+}
+
+/* ===================================================================
+   12. PASAPORTE
+   =================================================================== */
+
+.passport-header {
+  padding: var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.passport-header h3 {
+  margin-bottom: 5px;
+}
+
+.passport-header p {
+  font-size: 0.9rem;
+  margin-bottom: var(--space-sm);
+}
+
+/* Estadísticas del pasaporte */
+.passport-stats {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-sm);
+}
+
+.passport-stats > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+#passportCount {
+  color: var(--color-text-primary);
+  font-weight: bold;
+}
+
+#passportPercent {
+  color: var(--color-accent-success);
+  font-weight: bold;
+}
+
+/* Barra de progreso */
+.progress-bar-container {
+  background: rgba(0, 0, 0, 0.3);
+  height: 8px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-top: var(--space-sm);
+}
+
+.progress-bar-fill {
+  background: var(--gradient-success);
+  height: 100%;
+  transition: width var(--transition-slow);
+  box-shadow: 0 0 10px rgba(0, 212, 170, 0.5);
+}
+
+/* Grid de países */
+.passport-grid {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 20px; /* Mayor gap para táctil */
+  align-content: start;
+  
+  /* Scroll nativo */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  /* Safe area inferior */
+  padding-bottom: max(var(--space-lg), env(safe-area-inset-bottom));
+}
+
+.passport-country {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  
+  /* Táctil mínimo */
+  min-width: 70px;
+  min-height: 85px;
+  
+  /* Feedback táctil */
+  -webkit-tap-highlight-color: rgba(0, 212, 170, 0.1);
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.passport-country:hover,
+.passport-country:active {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+.passport-country.visited {
+  background: rgba(0, 212, 170, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 170, 0.3);
+  border: 1px solid rgba(0, 212, 170, 0.3);
+}
+
+.passport-country.visited:hover,
+.passport-country.visited:active {
+  background: rgba(0, 212, 170, 0.15);
+  box-shadow: 0 0 20px rgba(0, 212, 170, 0.4);
+}
+
+.passport-flag {
+  font-size: 2.5rem;
+  filter: grayscale(100%) opacity(0.3);
+  transition: all var(--transition-base);
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+}
+
+.passport-country.visited .passport-flag {
+  filter: grayscale(0%) opacity(1);
+  animation: unlockBounce 0.6s ease;
+}
+
+@keyframes unlockBounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(10deg); }
+}
+
+.passport-name {
+  font-size: 0.7rem;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.passport-country.visited .passport-name {
+  color: var(--color-accent-success);
+  font-weight: bold;
+}
+
+/* ===================================================================
+   13. OVERLAY DE RESULTADO
+   =================================================================== */
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: var(--z-modal);
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-lg);
+  backdrop-filter: blur(5px);
+}
+
+.result-card {
+  background: var(--gradient-card);
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp var(--transition-slow);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+.result-flag {
+  font-size: 8rem;
+  margin-bottom: var(--space-lg);
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+  line-height: 1;
+  animation: bounce 0.6s ease;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2) rotate(-10deg); }
+}
+
+.result-title {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-accent-secondary);
+  word-wrap: break-word;
+  font-family: var(--font-primary);
+}
+
+.result-message {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  font-size: 1.1rem;
+}
+
+/* ===================================================================
+   14. BOTONES DE RESULTADO
+   =================================================================== */
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  
+  /* Safe area inferior */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  width: 100%;
+  font-family: var(--font-primary);
+  
+  /* Táctil */
+  min-height: var(--touch-comfortable);
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--gradient-info);
+  color: white;
+  box-shadow: 0 10px 30px rgba(72, 219, 251, 0.4);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  box-shadow: 0 15px 40px rgba(72, 219, 251, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #5f27cd 0%, #341f97 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(95, 39, 205, 0.4);
+}
+
+.btn-secondary:hover,
+.btn-secondary:active {
+  box-shadow: 0 15px 40px rgba(95, 39, 205, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #ff6348 0%, #ee5a6f 100%);
+  color: white;
+  box-shadow: 0 10px 30px rgba(255, 99, 72, 0.4);
+}
+
+.btn-danger:hover,
+.btn-danger:active {
+  box-shadow: 0 15px 40px rgba(255, 99, 72, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 2px solid var(--color-text-secondary);
+}
+
+.btn-outline:hover,
+.btn-outline:active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.btn-visited {
+  background: var(--gradient-success);
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 212, 170, 0.4);
+}
+
+.btn-visited:hover,
+.btn-visited:active {
+  box-shadow: 0 15px 40px rgba(0, 212, 170, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ===================================================================
+   15. NOTIFICACIÓN
+   =================================================================== */
+
+.copy-notification {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: var(--gradient-success);
+  color: white;
+  padding: 15px 30px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-success);
+  font-weight: bold;
+  z-index: var(--z-toast);
+  opacity: 0;
+  transition: all var(--transition-base);
+  max-width: calc(100% - 40px);
+  text-align: center;
+  
+  /* Safe area superior */
+  top: max(20px, env(safe-area-inset-top));
+}
+
+.copy-notification.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ===================================================================
+   16. FOOTER
+   =================================================================== */
+
+footer {
+  background: rgba(0, 0, 0, 0.3);
+  padding: var(--space-xl) var(--space-lg);
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* Safe areas */
+  padding-bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+}
+
+footer p {
+  margin-bottom: 15px;
+}
+
+.coffee-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--gradient-secondary);
+  color: var(--color-bg-primary);
+  padding: 12px 30px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-weight: bold;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+  
+  /* Táctil */
+  min-height: var(--touch-min);
+}
+
+.coffee-button:hover,
+.coffee-button:active {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(255, 215, 0, 0.5);
+}
+
+footer a {
+  color: var(--color-accent-info);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+footer a:hover {
+  color: var(--color-accent-secondary);
+  text-decoration: underline;
+}
+
+/* ===================================================================
+   17. RESPONSIVE (Mobile-First ya aplicado arriba)
+   =================================================================== */
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .spin-button {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    min-width: 180px;
+  }
+  
+  .result-card {
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+  
+  .result-flag {
+    font-size: 5rem;
+  }
+  
+  .result-title {
+    font-size: 1.6rem;
+  }
+  
+  .overlay {
+    padding: 15px;
+  }
+  
+  .btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+  
+  .passport-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .result-flag {
+    font-size: 4rem;
+  }
+  
+  .result-card {
+    padding: 25px 15px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tablets y superiores */
+@media (min-width: 768px) {
+  .drawer {
+    max-width: 450px;
+  }
+  
+  .passport-grid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 25px;
+  }
+}
+
+/* ===================================================================
+   18. MEJORAS DE ACCESIBILIDAD
+   =================================================================== */
+
+/* Focus visible para teclado */
+*:focus-visible {
+  outline: 3px solid var(--color-accent-secondary);
+  outline-offset: 2px;
+}
+
+/* Reducir animaciones para usuarios con preferencia */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Modo oscuro forzado del sistema (respeto) */
+@media (prefers-color-scheme: dark) {
+  /* Ya estamos en modo oscuro por defecto */
+}
+
+/* ===================================================================
+   19. OPTIMIZACIONES DE RENDIMIENTO
+   =================================================================== */
+
+/* GPU acceleration para animaciones */
+.passport-country,
+.btn,
+.drawer,
+#wheelCanvas {
+  will-change: transform;
+}
+
+/* Evitar repaints innecesarios */
+.passport-grid,
+.countries-list {
+  contain: layout style paint;
+}
+
+/* ===================================================================
+   FEEDBACK TÁCTIL (Touch Feedback)
+   =================================================================== */
+
+/* Feedback visual para todos los elementos interactivos */
+button:active,
+.toggle:active,
+.passport-country:active,
+.country-item:active,
+a:active {
+  transform: scale(0.97);
+  opacity: 0.8;
+  transition: all 0.1s ease;
+}
+
+/* Excepción: botones que ya tienen su propia animación de hover */
+.btn-primary:active,
+.btn-secondary:active,
+.btn-danger:active,
+.btn-outline:active,
+.btn-visited:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* Ripple effect para móvil (opcional pero recomendado) */
+.active-touch {
+  transform: scale(0.97);
+  opacity: 0.8;
+  transition: all 0.1s ease;
+}
+
+/* ===================================================================
+   FIN DEL SISTEMA DE DISEÑO
+   =================================================================== */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="passport-btn" id="passportBtn" title="Mi Pasaporte">
+                <span class="passport-icon">🏆</span>
+            </button>
+            <h1>
+                <svg class="logo-icon" width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#FF6B6B" stroke-width="5"/>
+                    <circle cx="50" cy="50" r="10" fill="#FECA57"/>
+                    <path d="M50 5 L50 95" stroke="#FF6B6B" stroke-width="3"/>
+                    <path d="M5 50 L95 50" stroke="#FF6B6B" stroke-width="3"/>
+                    <path d="M18.18 18.18 L81.82 81.82" stroke="#FF6B6B" stroke-width="3"/>
+                    <path d="M18.18 81.82 L81.82 18.18" stroke="#FF6B6B" stroke-width="3"/>
+                </svg>
+                Ruleta Gastronómica
+            </h1>
+            <button class="settings-btn" id="settingsBtn" title="Ajustes">⚙️</button>
+        </div>
+
+        <p class="subtitle">Descubre tu próxima aventura culinaria</p>
+        
+        <div class="city-selector-container">
+            <select class="city-selector" id="citySelector">
+                <option value="Madrid">📍 Madrid</option>
+                <option value="Barcelona">📍 Barcelona</option>
+                <option value="Valencia">📍 Valencia</option>
+                <option value="Málaga">📍 Málaga</option>
+                <option value="Sevilla">📍 Sevilla</option>
+                <option value="Zaragoza">📍 Zaragoza</option>
+            </select>
+        </div>
+
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <canvas id="wheelCanvas"></canvas>
+        </div>
+
+        <button class="spin-button" id="spinButton">¡GIRA LA RULETA!</button>
+    </div>
+
+    <!-- Drawer de ajustes -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+     <!-- Drawer de Pasaporte -->
+    <div class="drawer-overlay-passport" id="drawerOverlayPassport"></div>
+    <div class="drawer" id="passportDrawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title">🏆 Mi Pasaporte</h2>
+            <button class="close-drawer" id="closePassportDrawer">×</button>
+        </div>
+        
+        <div class="passport-header">
+            <h3 style="color: #feca57; margin-bottom: 5px;">Tu Colección</h3>
+            <p style="color: #a8b2d1; font-size: 0.9rem; margin-bottom: 10px;" id="passportCity">Madrid</p>
+            <div class="passport-stats">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                    <span style="color: #fff; font-weight: bold;" id="passportCount">0 de 55</span>
+                    <span style="color: #1dd1a1; font-weight: bold;" id="passportPercent">0%</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="passportProgress" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="passport-grid" id="passportGrid"></div>
+    </div>
+    <!-- Drawer de Ajustes -->
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h2 class="drawer-title">⚙️ Ajustes de Países</h2>
+            <button class="install-btn" id="installBtn">📲 Instalar App</button>
+            <button class="close-drawer" id="closeDrawer">×</button>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar país...">
+        </div>
+        <div class="countries-list" id="countriesList"></div>
+    </div>
+
+    <!-- Overlay de resultado -->
+    <div class="overlay" id="resultOverlay">
+        <div class="result-card">
+            <div class="result-flag" id="resultFlag"></div>
+            <h2 class="result-title" id="resultCountry"></h2>
+            <p class="result-message">¡Tu destino gastronómico de hoy!</p>
+            <div class="btn-group">
+                <a class="btn btn-primary" id="mapsButton" target="_blank">📍 Ver restaurantes</a>
+                <button class="btn btn-visited" id="visitedButton">✅ Marcar como visitado</button>
+                <button class="btn btn-secondary" id="shareButton">🚀 Compartir</button>
+                <button class="btn btn-danger" id="excludeButton">🚫 No volver a mostrar</button>
+                <button class="btn btn-outline" id="closeButton">Girar de nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="copy-notification" id="copyNotification">✅ ¡Enlace copiado!</div>
+
+    <footer>
+        <p style="color: #a8b2d1; margin-bottom: 15px;">¿Te ha gustado? ☕</p>
+        <a href="https://buymeacoffee.com/ahurtado" class="coffee-button" target="_blank">
+            <span>☕</span><span>Buy Me a Coffee</span>
+        </a>
+        <p style="color: #7a8599; font-size: 0.8rem; margin-top: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
+            Proyecto personal sin ánimo de lucro | <a href="mailto:ahurtadogango@gmail.com" style="color: #48dbfb;">ahurtadogango@gmail.com</a>
+        </p>
+    </footer>
+
+    <script>
+        // ==================== DATABASE ====================
+        const DATABASE = {
+            Madrid: ['México', 'Argentina', 'Perú', 'Brasil', 'Colombia', 'Venezuela', 'Cuba', 'El Salvador', 'República Dominicana', 'Ecuador', 'Chile', 'Uruguay', 'Paraguay', 'Bolivia', 'Estados Unidos', 'Honduras', 'Nicaragua', 'Italia', 'Francia', 'Grecia', 'Portugal', 'Alemania', 'Polonia', 'Rusia', 'Ucrania', 'Georgia', 'Bélgica', 'Suiza', 'Rumanía', 'Bulgaria', 'Chequia', 'Armenia', 'Japón', 'China', 'Corea del Sur', 'India', 'Tailandia', 'Vietnam', 'Filipinas', 'Indonesia', 'Pakistán', 'Nepal', 'Irán', 'Líbano', 'Siria', 'Palestina', 'Israel', 'Turquía', 'Etiopía', 'Marruecos', 'Egipto', 'Senegal', 'Nigeria', 'Costa de Marfil', 'Australia'],
+            Barcelona: ['México', 'Argentina', 'Perú', 'Brasil', 'Colombia', 'Venezuela', 'Cuba', 'El Salvador', 'República Dominicana', 'Ecuador', 'Chile', 'Uruguay', 'Paraguay', 'Bolivia', 'Estados Unidos', 'Honduras', 'Nicaragua', 'Italia', 'Francia', 'Grecia', 'Portugal', 'Alemania', 'Reino Unido', 'Suecia', 'Polonia', 'Rusia', 'Ucrania', 'Georgia', 'Bélgica', 'Suiza', 'Rumanía', 'Bulgaria', 'Chequia', 'Hungría', 'Japón', 'China', 'Corea del Sur', 'India', 'Tailandia', 'Vietnam', 'Filipinas', 'Indonesia', 'Pakistán', 'Nepal', 'Irán', 'Líbano', 'Siria', 'Palestina', 'Israel', 'Turquía', 'Bangladesh', 'Afganistán', 'Etiopía', 'Marruecos', 'Egipto', 'Senegal', 'Ghana', 'Australia'],
+            Valencia: ['México', 'Argentina', 'Perú', 'Brasil', 'Colombia', 'Venezuela', 'Cuba', 'República Dominicana', 'Ecuador', 'Uruguay', 'Estados Unidos', 'El Salvador', 'Honduras', 'Italia', 'Francia', 'Alemania', 'Grecia', 'Portugal', 'Rumanía', 'Bulgaria', 'Ucrania', 'Georgia', 'Japón', 'China', 'Corea del Sur', 'India', 'Tailandia', 'Vietnam', 'Filipinas', 'Indonesia', 'Pakistán', 'Nepal', 'Líbano', 'Siria', 'Turquía', 'Marruecos', 'Senegal', 'Etiopía'],
+            Málaga: ['México', 'Argentina', 'Perú', 'Brasil', 'Colombia', 'Venezuela', 'Cuba', 'Chile', 'Uruguay', 'Estados Unidos', 'Italia', 'Francia', 'Reino Unido', 'Alemania', 'Suecia', 'Grecia', 'Portugal', 'Polonia', 'Japón', 'China', 'India', 'Tailandia', 'Corea del Sur', 'Filipinas', 'Vietnam', 'Turquía', 'Líbano', 'Marruecos', 'Etiopía'],
+            Sevilla: ['México', 'Argentina', 'Perú', 'Brasil', 'Colombia', 'Venezuela', 'Cuba', 'Estados Unidos', 'República Dominicana', 'Italia', 'Francia', 'Portugal', 'Grecia', 'Reino Unido', 'Japón', 'China', 'India', 'Tailandia', 'Corea del Sur', 'Vietnam', 'Líbano', 'Turquía', 'Marruecos', 'Senegal'],
+            Zaragoza: ['México', 'Argentina', 'Perú', 'Colombia', 'Venezuela', 'Cuba', 'Estados Unidos', 'Ecuador', 'Italia', 'Francia', 'Alemania', 'Rumanía', 'Grecia', 'Japón', 'China', 'India', 'Tailandia', 'Corea del Sur', 'Turquía', 'Vietnam', 'Marruecos']
+        };
+
+        const FLAGS = {'México': '🇲🇽', 'Argentina': '🇦🇷', 'Perú': '🇵🇪', 'Brasil': '🇧🇷', 'Colombia': '🇨🇴', 'Venezuela': '🇻🇪', 'Cuba': '🇨🇺', 'El Salvador': '🇸🇻', 'República Dominicana': '🇩🇴', 'Ecuador': '🇪🇨', 'Chile': '🇨🇱', 'Uruguay': '🇺🇾', 'Paraguay': '🇵🇾', 'Bolivia': '🇧🇴', 'Estados Unidos': '🇺🇸', 'Honduras': '🇭🇳', 'Nicaragua': '🇳🇮', 'Italia': '🇮🇹', 'Francia': '🇫🇷', 'Grecia': '🇬🇷', 'Portugal': '🇵🇹', 'Alemania': '🇩🇪', 'Polonia': '🇵🇱', 'Rusia': '🇷🇺', 'Ucrania': '🇺🇦', 'Georgia': '🇬🇪', 'Bélgica': '🇧🇪', 'Suiza': '🇨🇭', 'Rumanía': '🇷🇴', 'Bulgaria': '🇧🇬', 'Chequia': '🇨🇿', 'Armenia': '🇦🇲', 'Japón': '🇯🇵', 'China': '🇨🇳', 'Corea del Sur': '🇰🇷', 'India': '🇮🇳', 'Tailandia': '🇹🇭', 'Vietnam': '🇻🇳', 'Filipinas': '🇵🇭', 'Indonesia': '🇮🇩', 'Pakistán': '🇵🇰', 'Nepal': '🇳🇵', 'Irán': '🇮🇷', 'Líbano': '🇱🇧', 'Siria': '🇸🇾', 'Palestina': '🇵🇸', 'Israel': '🇮🇱', 'Turquía': '🇹🇷', 'Etiopía': '🇪🇹', 'Marruecos': '🇲🇦', 'Egipto': '🇪🇬', 'Senegal': '🇸🇳', 'Nigeria': '🇳🇬', 'Costa de Marfil': '🇨🇮', 'Australia': '🇦🇺', 'Reino Unido': '🇬🇧', 'Suecia': '🇸🇪', 'Hungría': '🇭🇺', 'Bangladesh': '🇧🇩', 'Afganistán': '🇦🇫', 'Ghana': '🇬🇭'};
+
+        const SEARCH_TERMS = {'México': 'mexicano', 'Argentina': 'argentino', 'Perú': 'peruano', 'Brasil': 'brasileño', 'Colombia': 'colombiano', 'Venezuela': 'venezolano', 'Cuba': 'cubano', 'El Salvador': 'salvadoreño', 'República Dominicana': 'dominicano', 'Ecuador': 'ecuatoriano', 'Chile': 'chileno', 'Uruguay': 'uruguayo', 'Paraguay': 'paraguayo', 'Bolivia': 'boliviano', 'Estados Unidos': 'americano', 'Honduras': 'hondureño', 'Nicaragua': 'nicaragüense', 'Italia': 'italiano', 'Francia': 'francés', 'Grecia': 'griego', 'Portugal': 'portugués', 'Alemania': 'alemán', 'Polonia': 'polaco', 'Rusia': 'ruso', 'Ucrania': 'ucraniano', 'Georgia': 'georgiano', 'Bélgica': 'belga', 'Suiza': 'suizo', 'Rumanía': 'rumano', 'Bulgaria': 'búlgaro', 'Chequia': 'checo', 'Armenia': 'armenio', 'Japón': 'japonés', 'China': 'chino', 'Corea del Sur': 'coreano', 'India': 'indio', 'Tailandia': 'tailandés', 'Vietnam': 'vietnamita', 'Filipinas': 'filipino', 'Indonesia': 'indonesio', 'Pakistán': 'pakistaní', 'Nepal': 'nepalí', 'Irán': 'persa', 'Líbano': 'libanés', 'Siria': 'sirio', 'Palestina': 'palestino', 'Israel': 'israelí', 'Turquía': 'turco', 'Etiopía': 'etíope', 'Marruecos': 'marroquí', 'Egipto': 'egipcio', 'Senegal': 'senegalés', 'Nigeria': 'nigeriano', 'Costa de Marfil': 'marfileño', 'Australia': 'australiano', 'Reino Unido': 'británico', 'Suecia': 'sueco', 'Hungría': 'húngaro', 'Bangladesh': 'bangladesí', 'Afganistán': 'afgano', 'Ghana': 'ghanés'};
+
+        // ==================== STORAGE MODULE ====================
+        const Storage = {
+            getExcluded(city) {
+                const key = `excluded_${city}`;
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : [];
+            },
+            
+            setExcluded(city, excludedList) {
+                const key = `excluded_${city}`;
+                localStorage.setItem(key, JSON.stringify(excludedList));
+            },
+            
+            toggleCountry(city, country) {
+                const excluded = this.getExcluded(city);
+                const index = excluded.indexOf(country);
+                if (index > -1) {
+                    excluded.splice(index, 1);
+                } else {
+                    excluded.push(country);
+                }
+                this.setExcluded(city, excluded);
+                return excluded;
+            },
+            
+            getCity() {
+                return localStorage.getItem('selectedCity') || 'Madrid';
+            },
+            
+            setCity(city) {
+                localStorage.setItem('selectedCity', city);
+            },
+            
+            getVisited(city) {
+                const key = `visited_${city}`;
+                const data = localStorage.getItem(key);
+                return data ? JSON.parse(data) : [];
+            },
+            
+            setVisited(city, visitedList) {
+                const key = `visited_${city}`;
+                localStorage.setItem(key, JSON.stringify(visitedList));
+            },
+            
+            toggleVisited(city, country) {
+                const visited = this.getVisited(city);
+                const index = visited.indexOf(country);
+                if (index > -1) {
+                    visited.splice(index, 1);
+                } else {
+                    visited.push(country);
+                }
+                this.setVisited(city, visited);
+                return visited;
+            },
+            
+            isVisited(city, country) {
+                return this.getVisited(city).includes(country);
+            }
+        };
+
+        // ==================== DATA MODULE ====================
+        const Data = {
+            generateCountries(city) {
+                const allCountries = DATABASE[city];
+                const excluded = Storage.getExcluded(city);
+                return allCountries
+                    .filter(c => !excluded.includes(c))
+                    .map(country => ({
+                        name: country,
+                        flag: FLAGS[country] || '🏳️',
+                        query: `restaurante+${SEARCH_TERMS[country] || country.toLowerCase()}`
+                    }));
+            },
+            
+            getAllCountries(city) {
+                return DATABASE[city].map(country => ({
+                    name: country,
+                    flag: FLAGS[country] || '🏳️',
+                    excluded: Storage.getExcluded(city).includes(country)
+                })).sort((a, b) => a.name.localeCompare(b.name));
+            }
+        };
+
+        // ==================== AUDIO MODULE ====================
+        const Audio = {
+            context: null,
+            unlocked: false,
+            clickInterval: null,
+            
+            unlock() {
+                if (this.unlocked) return;
+                try {
+                    this.context = new (window.AudioContext || window.webkitAudioContext)();
+                    const buffer = this.context.createBuffer(1, 1, 22050);
+                    const source = this.context.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(this.context.destination);
+                    source.start(0);
+                    this.unlocked = true;
+                } catch (e) {}
+            },
+            
+            playClick() {
+                if (!this.unlocked || !this.context) return;
+                try {
+                    const osc = this.context.createOscillator();
+                    const gain = this.context.createGain();
+                    osc.connect(gain);
+                    gain.connect(this.context.destination);
+                    osc.frequency.setValueAtTime(800, this.context.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(200, this.context.currentTime + 0.02);
+                    gain.gain.setValueAtTime(0.15, this.context.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, this.context.currentTime + 0.02);
+                    osc.start(this.context.currentTime);
+                    osc.stop(this.context.currentTime + 0.02);
+                } catch (e) {}
+            },
+            
+            playSuccess() {
+                if (!this.unlocked || !this.context) return;
+                try {
+                    const now = this.context.currentTime;
+                    [261.63, 329.63, 392.00, 523.25].forEach((freq, i) => {
+                        const osc = this.context.createOscillator();
+                        const gain = this.context.createGain();
+                        const filter = this.context.createBiquadFilter();
+                        osc.type = 'sine';
+                        osc.frequency.setValueAtTime(freq, now + i * 0.03);
+                        filter.type = 'lowpass';
+                        filter.frequency.setValueAtTime(freq * 2, now + i * 0.03);
+                        filter.Q.setValueAtTime(10, now + i * 0.03);
+                        gain.gain.setValueAtTime(0, now + i * 0.03);
+                        gain.gain.linearRampToValueAtTime(0.15, now + i * 0.03 + 0.01);
+                        gain.gain.exponentialRampToValueAtTime(0.01, now + i * 0.03 + 0.15);
+                        osc.connect(filter);
+                        filter.connect(gain);
+                        gain.connect(this.context.destination);
+                        osc.start(now + i * 0.03);
+                        osc.stop(now + i * 0.03 + 0.15);
+                    });
+                    
+                    const chordStart = now + 0.15;
+                    [523.25, 659.25, 783.99, 987.77, 1174.66].forEach(freq => {
+                        const osc = this.context.createOscillator();
+                        const gain = this.context.createGain();
+                        const filter = this.context.createBiquadFilter();
+                        osc.type = 'sawtooth';
+                        osc.frequency.setValueAtTime(freq, chordStart);
+                        filter.type = 'lowpass';
+                        filter.frequency.setValueAtTime(300, chordStart);
+                        filter.frequency.exponentialRampToValueAtTime(8000, chordStart + 0.1);
+                        filter.Q.setValueAtTime(8, chordStart);
+                        gain.gain.setValueAtTime(0, chordStart);
+                        gain.gain.linearRampToValueAtTime(0.12, chordStart + 0.01);
+                        gain.gain.exponentialRampToValueAtTime(0.08, chordStart + 0.1);
+                        gain.gain.exponentialRampToValueAtTime(0.05, chordStart + 0.5);
+                        gain.gain.exponentialRampToValueAtTime(0.01, chordStart + 1.2);
+                        osc.connect(filter);
+                        filter.connect(gain);
+                        gain.connect(this.context.destination);
+                        osc.start(chordStart);
+                        osc.stop(chordStart + 1.2);
+                    });
+                } catch (e) {}
+            }
+        };
+
+        // ==================== CANVAS MODULE ====================
+        const Canvas = {
+            element: document.getElementById('wheelCanvas'),
+            ctx: null,
+            rotation: 0,
+            
+            init() {
+                this.ctx = this.element.getContext('2d');
+                this.setup();
+            },
+            
+            setup() {
+                const rect = this.element.getBoundingClientRect();
+                this.element.width = rect.width;
+                this.element.height = rect.height;
+            },
+            
+            draw(countries) {
+                const w = this.element.width;
+                const h = this.element.height;
+                const centerX = w / 2;
+                const centerY = h / 2;
+                const radius = Math.min(centerX, centerY) - 10;
+                const sliceAngle = (2 * Math.PI) / countries.length;
+                const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#feca57', '#ff9ff3', '#54a0ff', '#48dbfb', '#1dd1a1', '#ee5a6f', '#ff6348', '#5f27cd', '#00d2d3'];
+
+                this.ctx.clearRect(0, 0, w, h);
+                
+                const flagSize = countries.length > 50 ? 12 : countries.length > 40 ? 14 : countries.length > 30 ? 18 : countries.length > 20 ? 22 : 26;
+
+                countries.forEach((country, i) => {
+                    const startAngle = i * sliceAngle;
+                    const endAngle = startAngle + sliceAngle;
+                    const midAngle = startAngle + sliceAngle / 2;
+
+                    this.ctx.save();
+                    this.ctx.translate(centerX, centerY);
+                    this.ctx.beginPath();
+                    this.ctx.arc(0, 0, radius, startAngle, endAngle);
+                    this.ctx.lineTo(0, 0);
+                    this.ctx.fillStyle = colors[i % colors.length];
+                    this.ctx.fill();
+                    this.ctx.strokeStyle = '#1a1a2e';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.stroke();
+
+                    this.ctx.rotate(midAngle);
+                    this.ctx.translate(radius * 0.85, 0);
+                    this.ctx.rotate(Math.PI / 2);
+                    this.ctx.textAlign = 'center';
+                    this.ctx.textBaseline = 'middle';
+                    this.ctx.font = `${flagSize}px "Apple Color Emoji", "Segoe UI Emoji", sans-serif`;
+                    this.ctx.fillStyle = '#fff';
+                    this.ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+                    this.ctx.shadowBlur = 4;
+                    this.ctx.fillText(country.flag, 0, 0);
+                    this.ctx.restore();
+                });
+
+                this.ctx.save();
+                this.ctx.translate(centerX, centerY);
+                this.ctx.beginPath();
+                this.ctx.arc(0, 0, 15, 0, 2 * Math.PI);
+                this.ctx.fillStyle = '#feca57';
+                this.ctx.fill();
+                this.ctx.strokeStyle = '#1a1a2e';
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+                this.ctx.restore();
+            }
+        };
+
+        // ==================== UI MODULE ====================
+        const UI = {
+            elements: {
+                spinButton: document.getElementById('spinButton'),
+                citySelector: document.getElementById('citySelector'),
+                resultOverlay: document.getElementById('resultOverlay'),
+                resultFlag: document.getElementById('resultFlag'),
+                resultCountry: document.getElementById('resultCountry'),
+                mapsButton: document.getElementById('mapsButton'),
+                shareButton: document.getElementById('shareButton'),
+                excludeButton: document.getElementById('excludeButton'),
+                closeButton: document.getElementById('closeButton'),
+                settingsBtn: document.getElementById('settingsBtn'),
+                passportBtn: document.getElementById('passportBtn'),
+                passportDrawer: document.getElementById('passportDrawer'),
+                drawerOverlayPassport: document.getElementById('drawerOverlayPassport'),
+                closePassportDrawer: document.getElementById('closePassportDrawer'),
+                drawer: document.getElementById('drawer'),
+                drawerOverlay: document.getElementById('drawerOverlay'),
+                closeDrawer: document.getElementById('closeDrawer'),
+                countriesList: document.getElementById('countriesList'),
+                searchInput: document.getElementById('searchInput'),
+                copyNotification: document.getElementById('copyNotification'),
+                visitedButton: document.getElementById('visitedButton')
+            },
+            
+            showResult(country, city) {
+                this.elements.resultFlag.textContent = country.flag;
+                this.elements.resultCountry.textContent = country.name;
+                this.elements.mapsButton.href = `https://www.google.com/maps/search/${country.query}+en+${city}`;
+                this.elements.resultOverlay.style.display = 'flex';
+            },
+            
+            hideResult() {
+                this.elements.resultOverlay.style.display = 'none';
+                window.history.replaceState({}, document.title, window.location.pathname);
+            },
+            
+            openDrawer() {
+                this.elements.drawerOverlay.style.display = 'block';
+                setTimeout(() => this.elements.drawer.classList.add('active'), 10);
+            },
+            
+            closeDrawer() {
+                this.elements.drawer.classList.remove('active');
+                setTimeout(() => this.elements.drawerOverlay.style.display = 'none', 300);
+            },
+
+            openPassportDrawer() {
+                this.elements.drawerOverlayPassport.style.display = 'block';
+                setTimeout(() => this.elements.passportDrawer.classList.add('active'), 10);
+            },
+            
+            closePassportDrawer() {
+                this.elements.passportDrawer.classList.remove('active');
+                setTimeout(() => this.elements.drawerOverlayPassport.style.display = 'none', 300);
+            },
+            
+            renderCountriesList(city, filter = '') {
+                const countries = Data.getAllCountries(city);
+                const filtered = countries.filter(c => c.name.toLowerCase().includes(filter.toLowerCase()));
+                
+                this.elements.countriesList.innerHTML = filtered.map(c => `
+                    <div class="country-item">
+                        <div class="country-name">${c.flag} ${c.name}</div>
+                        <div class="toggle ${c.excluded ? '' : 'active'}" data-country="${c.name}">
+                            <div class="toggle-thumb"></div>
+                        </div>
+                    </div>
+                `).join('');
+            },
+            
+            showNotification(message) {
+                this.elements.copyNotification.textContent = message;
+                this.elements.copyNotification.classList.add('show');
+                setTimeout(() => this.elements.copyNotification.classList.remove('show'), 3000);
+            },
+            
+         renderPassport(city) {
+                const allCountries = DATABASE[city].slice().sort((a, b) => a.localeCompare(b));
+                const visited = Storage.getVisited(city);
+                const total = allCountries.length;
+                const count = visited.length;
+                const percent = Math.round((count / total) * 100);
+                
+                document.getElementById('passportCity').textContent = city;
+                document.getElementById('passportCount').textContent = `${count} de ${total}`;
+                document.getElementById('passportPercent').textContent = `${percent}%`;
+                document.getElementById('passportProgress').style.width = `${percent}%`;
+                
+                const grid = document.getElementById('passportGrid');
+                grid.innerHTML = allCountries.map(country => `
+                    <div class="passport-country ${visited.includes(country) ? 'visited' : ''}" data-country="${country}">
+                        <div class="passport-flag">${FLAGS[country] || '🏳️'}</div>
+                        <div class="passport-name">${country}</div>
+                    </div>
+                `).join('');
+                
+                // Añadir eventos click a cada país
+                grid.querySelectorAll('.passport-country').forEach(countryEl => {
+                    countryEl.addEventListener('click', () => {
+                        const country = countryEl.dataset.country;
+                        Storage.toggleVisited(city, country);
+                        const isNowVisited = Storage.isVisited(city, country);
+                        
+                        // Actualizar visualmente solo ese país
+                        countryEl.classList.toggle('visited', isNowVisited);
+                        
+                        // Actualizar estadísticas
+                        const newVisited = Storage.getVisited(city);
+                        const newCount = newVisited.length;
+                        const newPercent = Math.round((newCount / total) * 100);
+                        
+                        document.getElementById('passportCount').textContent = `${newCount} de ${total}`;
+                        document.getElementById('passportPercent').textContent = `${newPercent}%`;
+                        document.getElementById('passportProgress').style.width = `${newPercent}%`;
+                        
+                        // Notificación
+                        UI.showNotification(isNowVisited ? 
+                            `✅ ${country} visitado` : 
+                            `❌ ${country} desmarcado`
+                        );
+                    });
+                });
+            }
+        };
+
+        // ==================== APP MODULE ====================
+        const App = {
+            currentCity: 'Madrid',
+            countries: [],
+            selectedCountry: null,
+            isSpinning: false,
+            deferredPrompt: null,
+            
+            init() {
+                Canvas.init();
+                this.setupEvents();
+                this.setupPWA();
+                this.loadFromURL();
+                window.addEventListener('resize', () => {
+                    Canvas.setup();
+                    Canvas.draw(this.countries);
+                });
+            },
+            
+            setupPWA() {
+                window.addEventListener('beforeinstallprompt', (e) => {
+                    e.preventDefault();
+                    this.deferredPrompt = e;
+                    document.getElementById('installBtn').classList.add('show');
+                });
+
+                window.addEventListener('appinstalled', () => {
+                    this.deferredPrompt = null;
+                    document.getElementById('installBtn').classList.remove('show');
+                    UI.showNotification('✅ ¡App instalada correctamente!');
+                });
+
+                if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', () => {
+                        navigator.serviceWorker.register('/sw.js')
+                            .then(reg => console.log('SW registered:', reg.scope))
+                            .catch(err => console.log('SW registration failed:', err));
+                    });
+                }
+            },
+            
+            async installApp() {
+                if (!this.deferredPrompt) return;
+                
+                this.deferredPrompt.prompt();
+                const { outcome } = await this.deferredPrompt.userChoice;
+                
+                if (outcome === 'accepted') {
+                    UI.showNotification('📲 Instalando app...');
+                }
+                
+                this.deferredPrompt = null;
+                document.getElementById('installBtn').classList.remove('show');
+            },
+            
+            loadFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                const urlCity = params.get('city');
+                const urlCountry = params.get('country');
+                
+                if (urlCity && urlCountry && DATABASE[urlCity] && DATABASE[urlCity].includes(urlCountry)) {
+                    this.currentCity = urlCity;
+                    UI.elements.citySelector.value = urlCity;
+                    this.countries = Data.generateCountries(this.currentCity);
+                    Canvas.setup();
+                    Canvas.draw(this.countries);
+                    Canvas.element.style.transition = 'transform 5s cubic-bezier(0.1, 0, 0.1, 1)';
+                    
+                    this.selectedCountry = {
+                        name: urlCountry,
+                        flag: FLAGS[urlCountry],
+                        query: `restaurante+${SEARCH_TERMS[urlCountry]}`
+                    };
+                    UI.showResult(this.selectedCountry, this.currentCity);
+                } else {
+                    this.currentCity = Storage.getCity();
+                    UI.elements.citySelector.value = this.currentCity;
+                    this.updateCity(this.currentCity);
+                }
+            },
+            
+            updateCity(city) {
+                this.currentCity = city;
+                Storage.setCity(city);
+                this.countries = Data.generateCountries(city);
+                Canvas.element.style.transition = 'none';
+                Canvas.element.style.transform = 'rotate(0deg)';
+                Canvas.rotation = 0;
+                Canvas.setup();
+                Canvas.draw(this.countries);
+                setTimeout(() => {
+                    Canvas.element.style.transition = 'transform 5s cubic-bezier(0.1, 0, 0.1, 1)';
+                }, 50);
+                UI.renderPassport(city);
+            },
+            
+            spin() {
+                if (this.isSpinning || this.countries.length === 0) return;
+                Audio.unlock();
+                this.isSpinning = true;
+                UI.elements.spinButton.disabled = true;
+                UI.elements.spinButton.textContent = 'Girando...';
+
+                const winningIndex = Math.floor(Math.random() * this.countries.length);
+                const gradosPorPorcion = 360 / this.countries.length;
+                const anguloDeseado = (winningIndex * gradosPorPorcion) + (gradosPorPorcion / 2);
+                const desplazamientoFinal = (360 - anguloDeseado + 270) % 360;
+                const vueltasCompletas = 5 + Math.floor(Math.random() * 3);
+                const rotacionAnterior = Canvas.rotation % 360;
+                Canvas.rotation += (vueltasCompletas * 360) + desplazamientoFinal - rotacionAnterior;
+                
+                Canvas.element.style.transform = `rotate(${Canvas.rotation}deg)`;
+
+                let clickSpeed = 50;
+                const maxSpeed = 300;
+                const duration = 5000;
+                const startTime = Date.now();
+
+                Audio.clickInterval = setInterval(() => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = elapsed / duration;
+                    if (progress < 1) {
+                        clickSpeed = 50 + (maxSpeed - 50) * progress;
+                        Audio.playClick();
+                    } else {
+                        clearInterval(Audio.clickInterval);
+                    }
+                }, clickSpeed);
+
+                Canvas.element.addEventListener('transitionend', () => {
+                    if (Audio.clickInterval) {
+                        clearInterval(Audio.clickInterval);
+                        Audio.clickInterval = null;
+                    }
+                    
+                    setTimeout(() => {
+                        this.selectedCountry = this.countries[winningIndex];
+                        UI.showResult(this.selectedCountry, this.currentCity);
+                        Audio.playSuccess();
+                        this.isSpinning = false;
+                        UI.elements.spinButton.disabled = false;
+                        UI.elements.spinButton.textContent = '¡GIRA LA RULETA!';
+                    }, 200);
+                }, { once: true });
+            },
+            
+            async share() {
+                if (!this.selectedCountry) return;
+                const params = new URLSearchParams({ city: this.currentCity, country: this.selectedCountry.name });
+                const shareUrl = `https://gastroruleta.netlify.app/?${params.toString()}`;
+                const shareText = `¡El destino ha decidido! Hoy cenamos comida de ${this.selectedCountry.name} ${this.selectedCountry.flag}. Mira dónde en: ${shareUrl}`;
+                
+                if (navigator.share) {
+                    try {
+                        await navigator.share({ title: 'Ruleta Gastronómica', text: shareText });
+                    } catch (err) {
+                        if (err.name !== 'AbortError') this.copyToClipboard(shareText);
+                    }
+                } else {
+                    this.copyToClipboard(shareText);
+                }
+            },
+            
+            copyToClipboard(text) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => UI.showNotification('✅ ¡Enlace copiado!')).catch(() => this.fallbackCopy(text));
+                } else {
+                    this.fallbackCopy(text);
+                }
+            },
+            
+            fallbackCopy(text) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    UI.showNotification('✅ ¡Enlace copiado!');
+                } catch (e) {}
+                document.body.removeChild(ta);
+            },
+            
+            markAsVisited() {
+                if (!this.selectedCountry) return;
+                Storage.toggleVisited(this.currentCity, this.selectedCountry.name);
+                const isNowVisited = Storage.isVisited(this.currentCity, this.selectedCountry.name);
+                UI.showNotification(isNowVisited ? 
+                    `✅ ${this.selectedCountry.name} marcado como visitado` : 
+                    `❌ ${this.selectedCountry.name} desmarcado`
+                );
+                UI.renderPassport(this.currentCity);
+            },
+            
+            excludeCountry() {
+                if (!this.selectedCountry) return;
+                Storage.toggleCountry(this.currentCity, this.selectedCountry.name);
+                UI.hideResult();
+                this.updateCity(this.currentCity);
+                UI.showNotification(`🚫 ${this.selectedCountry.name} excluido`);
+            },
+            
+            setupEvents() {
+                UI.elements.spinButton.addEventListener('click', () => this.spin());
+                UI.elements.citySelector.addEventListener('change', (e) => this.updateCity(e.target.value));
+                UI.elements.shareButton.addEventListener('click', () => this.share());
+                UI.elements.excludeButton.addEventListener('click', () => this.excludeCountry());
+                UI.elements.closeButton.addEventListener('click', () => UI.hideResult());
+                
+                UI.elements.settingsBtn.addEventListener('click', () => {
+                    UI.renderCountriesList(this.currentCity);
+                    UI.openDrawer();
+                });
+
+                UI.elements.passportBtn.addEventListener('click', () => {
+                    UI.renderPassport(this.currentCity);
+                    UI.openPassportDrawer();
+                });
+                
+                UI.elements.closePassportDrawer.addEventListener('click', () => UI.closePassportDrawer());
+                UI.elements.drawerOverlayPassport.addEventListener('click', () => UI.closePassportDrawer());
+                
+                UI.elements.closeDrawer.addEventListener('click', () => UI.closeDrawer());
+                UI.elements.drawerOverlay.addEventListener('click', () => UI.closeDrawer());
+                
+                UI.elements.searchInput.addEventListener('input', (e) => {
+                    UI.renderCountriesList(this.currentCity, e.target.value);
+                });
+                
+                UI.elements.countriesList.addEventListener('click', (e) => {
+                    const toggle = e.target.closest('.toggle');
+                    if (toggle) {
+                        const country = toggle.dataset.country;
+                        Storage.toggleCountry(this.currentCity, country);
+                        toggle.classList.toggle('active');
+                        this.updateCity(this.currentCity);
+                    }
+                });
+                
+                UI.elements.visitedButton.addEventListener('click', () => this.markAsVisited());
+
+                document.getElementById('installBtn').addEventListener('click', () => this.installApp());
+            }
+        };
+
+        // ==================== INITIALIZE ====================
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => App.init());
+        } else {
+            App.init();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "Ruleta Gastronómica",
+  "short_name": "GastroRuleta",
+  "description": "Tu asistente para decidir qué cenar hoy.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#FF6B6B",
+  "icons": [
+    {
+      "src": "./logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
